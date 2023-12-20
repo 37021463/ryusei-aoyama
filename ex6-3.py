@@ -28,6 +28,32 @@ for h in range(100):
             data[h][i][j][1] = 1/2*keypoints[j * 3 + 1]
             data[h][i][j][2] = keypoints[j * 3 + 2]
 
+links = [
+    [17, 15],
+    [15, 0],
+    [16, 0],
+    [16, 18],
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 4],
+    [1, 5],
+    [5, 6],
+    [6, 7],
+    [1, 8],
+    [8, 9],
+    [9, 10],
+    [10, 11],
+    [11, 24],
+    [11, 22],
+    [22, 23],
+    [8, 12],
+    [12, 13],
+    [13, 14],
+    [14, 21],
+    [14, 19],
+    [19, 20],]
+
 def create_line(h,i):
     if data[h][i][0][2] and data[h][i][1][2] > 0:
         canvas.create_line(data[h][i][0][0],data[h][i][0][1],data[h][i][1][0],data[h][i][1][1],width=2)
@@ -78,15 +104,22 @@ def create_line(h,i):
     if data[h][i][16][2] and data[h][i][18][2]> 0:
         canvas.create_line(data[h][i][16][0],data[h][i][16][1],data[h][i][18][0],data[h][i][18][1],width=2)
 
+def create_line2(h,i):
+    for j in range(23):
+        if data[h][i][links[j][0]][2] and data[h][i][links[j][1]][2] > 0:
+            canvas.create_line(data[h][i][links[j][0]][0],data[h][i][links[j][0]][1],data[h][i][links[j][1]][0],data[h][i][links[j][1]][1],width=2)
+
+
 def animate(frame_number=0):
     canvas.delete("all")  # アニメーションのたびにキャンバスをクリア
 
     for i in range(2):
-        create_line(frame_number, i)
+        create_line2(frame_number, i)
 
     frame_number += 1
     if frame_number < 100:
         root.after(50, animate, frame_number)  # アニメーション速度を調整
 
 animate()  # アニメーションを開始
+
 root.mainloop()
