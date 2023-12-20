@@ -24,8 +24,8 @@ for h in range(100):
     for i in range(2):
         keypoints = file_data['people'][i]['pose_keypoints_2d']
         for j in range(25):
-            data[h][i][j][0] = keypoints[j * 3]
-            data[h][i][j][1] = keypoints[j * 3 + 1]
+            data[h][i][j][0] = 1/2*keypoints[j * 3]
+            data[h][i][j][1] = 1/2*keypoints[j * 3 + 1]
             data[h][i][j][2] = keypoints[j * 3 + 2]
 
 def create_line(h,i):
